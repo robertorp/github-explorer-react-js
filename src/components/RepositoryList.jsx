@@ -8,11 +8,14 @@ const repository = {
   link: 'https://github.com/unform/unform'
 };
 
-//https://api.github.com/users/robertorp/repos
-
 export function RepositoryList() {
   const [repositories, setRepositories] = useState([])
 
+  useEffect(() => {
+    fetch('https://api.github.com/users/robertorp/repos')
+      .then(response => response.json())
+      .then(data => setRepositories(data));
+  }, []);
 
   return (
     <section className="repository-list">
